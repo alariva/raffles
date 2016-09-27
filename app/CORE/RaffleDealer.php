@@ -9,6 +9,8 @@ class RaffleDealer
 {
     private $raffle;
 
+    private $padding = 3;
+
     private $range;
 
     public function __construct($raffle = null)
@@ -23,6 +25,13 @@ class RaffleDealer
     public function setRaffle(Raffle $raffle)
     {
         $this->raffle = $raffle;
+
+        return $this;
+    }
+
+    public function setPadding(int $positions)
+    {
+        $this->padding = $positions;
 
         return $this;
     }
@@ -62,7 +71,7 @@ class RaffleDealer
         return $this->range
                     ->create($this->raffle->range)
                     ->exclude($exclusionNumbers)
-                    ->pad(4)
+                    ->pad($this->padding)
                     ->get();
     }
 }
