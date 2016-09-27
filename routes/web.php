@@ -15,10 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/{raffle}/coupons', function ($raffle) {
-//     
-// });
-
 Route::get('/{raffle}/coupons', [
+    'as'   => 'coupons.browse',
     'uses' => 'CouponsController@browse',
+]);
+
+Route::get('/{raffle}/checkout', [
+    'as'   => 'coupons.checkout',
+    'uses' => 'CouponsController@checkout',
+]);
+
+Route::get('/coupons/add/{number}', [
+    'as'   => 'coupons.add',
+    'uses' => 'CouponsController@add',
+]);
+
+Route::get('/coupons/reset', [
+    'as'   => 'coupons.reset',
+    'uses' => 'CouponsController@reset',
 ]);
