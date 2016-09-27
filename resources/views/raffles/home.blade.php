@@ -1,7 +1,9 @@
 @extends('layouts.public')
 @section('page_heading', $raffle->name)
 @section('section')
-           
-Welcome to {{ $raffle->slug }}
-            
+
+<div class="container">           
+    {!! Markdown::convertToHtml( $raffle->description ) !!}
+</div>
+
 @stop
