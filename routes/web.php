@@ -20,6 +20,11 @@ Route::get('/{raffle}/coupons', [
     'uses' => 'CouponsController@browse',
 ]);
 
+Route::get('/{raffle}/confirm', [
+    'as'   => 'coupons.confirm',
+    'uses' => 'CouponsController@confirm',
+]);
+
 Route::get('/{raffle}/checkout', [
     'as'   => 'coupons.checkout',
     'uses' => 'CouponsController@checkout',

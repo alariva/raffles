@@ -17,9 +17,11 @@
         @endforeach
       </ul>
     <div class="panel-footer">
+      <a href="{{ route('coupons.confirm', $raffle) }}" target="_blank" title="Comprar rifas">
       <button type="button" class="btn btn-success btn-block btn-lg" aria-label="">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Comprar Rifas
       </button>
+      </a>
     </div>
     </div>
 </div>
