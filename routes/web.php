@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/{raffle}/coupons', function ($raffle) {
+//     
+// });
+
+Route::get('/{raffle}/coupons', [
+    'uses' => 'CouponsController@browse',
+]);
