@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/{raffle}', [
+    'as'   => 'raffle.home',
+    'uses' => 'RaffleController@home',
+]);
+
 Route::get('/{raffle}/coupons', [
     'as'   => 'coupons.browse',
     'uses' => 'CouponsController@browse',
