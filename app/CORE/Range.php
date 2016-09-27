@@ -11,12 +11,12 @@ class Range
         $ranges = $this->getRanges($expression);
 
         $fits = false;
-        foreach($ranges as $range)
-        {
+        foreach ($ranges as $range) {
             list($min, $max) = explode('-', $range);
-            
+
             $fits |= (intval($min) <= intval($number)) && (intval($number) <= intval($max));
         }
+
         return $fits;
     }
 
@@ -24,7 +24,7 @@ class Range
     {
         $ranges = $this->getRanges($expression);
 
-        $ranges = array_map(function($item){
+        $ranges = array_map(function ($item) {
             list($min, $max) = explode('-', $item);
 
             return range($min, $max);
