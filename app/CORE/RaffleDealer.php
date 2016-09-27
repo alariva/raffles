@@ -53,6 +53,7 @@ class RaffleDealer
         return $this->range
                     ->create($this->raffle->range)
                     ->exclude($exclusionNumbers)
+                    ->pad(4)
                     ->get();
     }
 }

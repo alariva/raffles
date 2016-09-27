@@ -44,6 +44,15 @@ class Range
         return $this;
     }
 
+    public function pad($positions)
+    {
+        $this->numbers = $this->numbers->map(function ($item) use ($positions) {
+            return str_pad($item, $positions, '0', STR_PAD_LEFT);
+        });
+
+        return $this;
+    }
+
     public function get()
     {
         return $this->numbers->values()->all();
