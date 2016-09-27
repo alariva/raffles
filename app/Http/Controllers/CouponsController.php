@@ -19,8 +19,6 @@ class CouponsController extends Controller
 
     public function browse(Raffle $raffle)
     {
-        session(['cart.raffle' => $raffle]);
-
         $selected = session('cart.numbers');
 
         $dealer = new RaffleDealer($raffle);
