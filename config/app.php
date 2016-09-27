@@ -180,6 +180,7 @@ return [
 
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -259,6 +260,9 @@ return [
         'Tabbable'       => Bootstrapper\Facades\Tabbable::class,
         'Table'          => Bootstrapper\Facades\Table::class,
         'Thumbnail'      => Bootstrapper\Facades\Thumbnail::class,
+
+        'Form'           => Collective\Html\FormFacade::class,
+        'Html'           => Collective\Html\HtmlFacade::class,
     ],
 
 ];
