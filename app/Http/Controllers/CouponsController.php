@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CORE\RaffleDealer;
 use App\Coupon;
 use App\Raffle;
+use Illuminate\Http\Request;
 
 class CouponsController extends Controller
 {
@@ -36,8 +37,7 @@ class CouponsController extends Controller
 
         $numbers = session('cart.numbers');
 
-        if(count($numbers) >= 2)
-        {
+        if (count($numbers) >= 2) {
             return redirect()->route('coupons.checkout', $raffle);
         }
 
@@ -48,25 +48,33 @@ class CouponsController extends Controller
     {
         $coupons = session('cart.numbers');
 
-        return view('checkout', compact('coupons', 'raffle'));
+        $price = $this->calculatePrice(count($coupons));
+
+        return view('checkout', compact('coupons', 'price', 'raffle'));
     }
 
-    public function confirm(Raffle $raffle)
+    public function confirm(Raffle $raffle, Request $request)
     {
+        $data = $request->only(['name', 'email', 'tel', 'city']);
+
         $coupons = session('cart.numbers');
+
+        $data['numbers'] = $coupons;
+
+        logger()->info('COMPRA CONFIRMADA: '.serialize($data));
 
         $this->reserveCoupons($raffle, $coupons);
 
         $count = count($coupons);
 
-        $price = $count % 2 * 60 + floor($count / 2) * 40;
+        $price = $this->calculatePrice($count);
 
         // id=516862&precio=15,30&venc=7&codigo=15&hacia=website2@website2.com&concepto=hosting plan 4
         $query = http_build_query([
-            'id' => 516862,
-            'precio' => $price,
-            'venc' => 3,
-            'codigo' => 'RifaDKVM',
+            'id'       => 516862,
+            'precio'   => $price,
+            'venc'     => 3,
+            'codigo'   => 'RifaDKVM',
             'concepto' => $count.' talones: '.implode(',', $coupons),
             ]);
 
@@ -78,9 +86,19 @@ class CouponsController extends Controller
         foreach ($coupons as $coupon) {
             $coupon = new Coupon([
                 'number' => $coupon,
-                'status' => 'R'
+                'status' => 'R',
                 ]);
             $raffle->coupons()->save($coupon);
         }
+    }
+
+    protected function calculatePrice($count)
+    {
+        $individualPrice = 40; // Currency
+        $comboPrice = 60; // Currency
+
+        $comboNomber = 2; // Number of elements
+
+        return $count % $comboNomber * $individualPrice + floor($count / $comboNomber) * $comboPrice;
     }
 }

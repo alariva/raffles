@@ -25,7 +25,7 @@ Route::get('/{raffle}/coupons', [
     'uses' => 'CouponsController@browse',
 ]);
 
-Route::get('/{raffle}/confirm', [
+Route::post('/{raffle}/confirm', [
     'as'   => 'coupons.confirm',
     'uses' => 'CouponsController@confirm',
 ]);
