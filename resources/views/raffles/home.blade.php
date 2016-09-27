@@ -5,7 +5,10 @@
 <div class="container-fluid">     
     {!! Markdown::convertToHtml( $raffle->description ) !!}
 
-    {!! Button::primary('Elegi tus numeros de la suerte acá')->block()->large() !!}
+    {!! Button::primary('Elegi tus numeros de la suerte acá')
+                ->block()
+                ->large()
+                ->asLinkTo(route('coupons.browse', $raffle)) !!}
 </div>
 
 @stop
