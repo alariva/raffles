@@ -11,11 +11,20 @@ class RaffleDealer
 
     private $range;
 
-    public function __construct(Raffle $raffle)
+    public function __construct($raffle = null)
+    {
+        if ($raffle) {
+            $this->setRaffle($raffle);
+        }
+
+        $this->range = new Range();
+    }
+
+    public function setRaffle(Raffle $raffle)
     {
         $this->raffle = $raffle;
 
-        $this->range = new Range();
+        return $this;
     }
 
     // check

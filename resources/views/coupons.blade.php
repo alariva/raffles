@@ -22,9 +22,21 @@
         @endforeach
       </ul>
     <div class="panel-footer">
-      <button type="button" class="btn btn-success btn-block btn-lg" aria-label="">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Comprar Rifa
-      </button>
+
+    @if(count($selected)>0)
+
+      {!! Button::success('Reservar Rifas')
+                  ->large()
+                  ->block()
+                  ->withIcon('<i class="fa fa-shopping-cart" aria-hidden="true"></i>')
+                  ->asLinkTo(route('coupons.checkout', $raffle)) !!}
+
+    @else
+
+      {!! Alert::info('Elegí una rifa para reservar') !!}
+
+    @endif
+
     </div>
     </div>
 </div>

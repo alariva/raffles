@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CouponsController extends Controller
 {
+    protected $dealer;
+
+    public function __construct()
+    {
+        $this->dealer = new RaffleDealer();
+    }
+
     public function reset()
     {
         $raffle = session('cart.raffle');
@@ -22,16 +29,18 @@ class CouponsController extends Controller
     {
         $selected = session('cart.numbers');
 
-        $dealer = new RaffleDealer($raffle);
+        $coupons = $this->dealer->setRaffle($raffle)->browse();
 
-        $coupons = $dealer->browse();
-
-        return view('coupons', compact('coupons', 'selected'));
+        return view('coupons', compact('raffle', 'coupons', 'selected'));
     }
 
     public function add($number)
     {
         $raffle = session('cart.raffle');
+
+        if (!$this->couponsAreAvailable($raffle, $number)) {
+            return redirect()->route('coupons.browse', $raffle)->withError('El numero ya fue ocupado');
+        }
 
         session()->push('cart.numbers', $number);
 
@@ -48,9 +57,13 @@ class CouponsController extends Controller
     {
         $coupons = session('cart.numbers');
 
+        if (!$this->couponsAreAvailable($raffle, $coupons)) {
+            return redirect()->back()->withError('Al menos uno de los números ya fue tomado');
+        }
+
         $price = $this->calculatePrice(count($coupons));
 
-        return view('checkout', compact('coupons', 'price', 'raffle'));
+        return view('checkout', compact('raffle', 'coupons', 'price'));
     }
 
     public function confirm(Raffle $raffle, Request $request)
@@ -100,5 +113,20 @@ class CouponsController extends Controller
         $comboNomber = 2; // Number of elements
 
         return $count % $comboNomber * $individualPrice + floor($count / $comboNomber) * $comboPrice;
+    }
+
+    protected function couponsAreAvailable(Raffle $raffle, $coupons)
+    {
+        if (!is_array($coupons)) {
+            $coupons = [$coupons];
+        }
+
+        foreach ($coupons as $coupon) {
+            if (!$this->dealer->setRaffle($raffle)->isAvailable($coupon)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
