@@ -38,8 +38,8 @@ class CouponsController extends Controller
     {
         $raffle = session('cart.raffle');
 
-        if (!$this->couponsAreAvailable($raffle, $number)) {
-            return redirect()->route('coupons.browse', $raffle)->withError('El numero ya fue ocupado');
+        if(!$this->couponsAreAvailable($raffle, $number)){
+            return redirect()->route('coupons.browse', $raffle)->withError("El numero {$number} ya fue reservado");
         }
 
         session()->push('cart.numbers', $number);
@@ -57,8 +57,8 @@ class CouponsController extends Controller
     {
         $coupons = session('cart.numbers');
 
-        if (!$this->couponsAreAvailable($raffle, $coupons)) {
-            return redirect()->back()->withError('Al menos uno de los números ya fue tomado');
+        if(!$this->couponsAreAvailable($raffle, $coupons)){
+            return redirect()->route('raffle.home', $raffle)->withError("Al menos uno de los numeros ya fue reservado");
         }
 
         $price = $this->calculatePrice(count($coupons));
@@ -73,6 +73,10 @@ class CouponsController extends Controller
         $coupons = session('cart.numbers');
 
         $data['numbers'] = $coupons;
+
+        if(!$this->couponsAreAvailable($raffle, $coupons)){
+            return redirect()->route('raffle.home', $raffle)->withError("Al menos uno de los numeros ya fue reservado");
+        }
 
         logger()->info('COMPRA CONFIRMADA: '.serialize($data));
 
