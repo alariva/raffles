@@ -39,7 +39,7 @@ class RaffleDealer
     // check
     public function isAvailable($number)
     {
-        $number = intval($number);
+        $this->saneNumber($number);
 
         if (!$this->range->valid($this->raffle->range, $number)) {
             return false;
@@ -53,6 +53,8 @@ class RaffleDealer
     // pick
     public function pick($number)
     {
+        $this->saneNumber($number);
+
         if (!$this->isAvailable($number)) {
             return false;
         }
@@ -75,5 +77,10 @@ class RaffleDealer
                     ->exclude($exclusionNumbers)
                     ->pad($this->padding)
                     ->get();
+    }
+
+    protected function saneNumber(&$number)
+    {
+        return $number = intval($number);
     }
 }
