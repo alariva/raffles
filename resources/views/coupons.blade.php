@@ -26,7 +26,7 @@
 
     @if(count($selected)>0)
 
-      {!! Button::success('Reservar Rifas')
+      {!! Button::primary('Continuar')
                   ->large()
                   ->block()
                   ->withIcon('<i class="fa fa-shopping-cart" aria-hidden="true"></i>')
