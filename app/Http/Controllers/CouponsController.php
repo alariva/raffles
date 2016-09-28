@@ -38,7 +38,7 @@ class CouponsController extends Controller
     {
         $raffle = session('cart.raffle');
 
-        if(!$this->couponsAreAvailable($raffle, $number)){
+        if (!$this->couponsAreAvailable($raffle, $number)) {
             return redirect()->route('coupons.browse', $raffle)->withError("El numero {$number} ya fue reservado");
         }
 
@@ -57,8 +57,8 @@ class CouponsController extends Controller
     {
         $coupons = session('cart.numbers');
 
-        if(!$this->couponsAreAvailable($raffle, $coupons)){
-            return redirect()->route('raffle.home', $raffle)->withError("Al menos uno de los numeros ya fue reservado");
+        if (!$this->couponsAreAvailable($raffle, $coupons)) {
+            return redirect()->route('raffle.home', $raffle)->withError('Al menos uno de los numeros ya fue reservado');
         }
 
         $price = $this->calculatePrice(count($coupons));
@@ -68,17 +68,24 @@ class CouponsController extends Controller
 
     public function confirm(Raffle $raffle, Request $request)
     {
-        $data = $request->only(['name', 'email', 'tel', 'city']);
+        $this->validate($request, [
+            'name'      => 'required|max:255',
+            'email'     => 'required|email',
+            'tel'       => 'required|max:16',
+            'city'      => 'required|max:100',
+        ]);
+
+        $ticket = $request->only(['name', 'email', 'tel', 'city']);
 
         $coupons = session('cart.numbers');
 
-        $data['numbers'] = $coupons;
+        $ticket['numbers'] = $coupons;
 
-        if(!$this->couponsAreAvailable($raffle, $coupons)){
-            return redirect()->route('raffle.home', $raffle)->withError("Al menos uno de los numeros ya fue reservado");
+        if (!$this->couponsAreAvailable($raffle, $coupons)) {
+            return redirect()->route('raffle.home', $raffle)->withError('Al menos uno de los numeros ya fue reservado');
         }
 
-        logger()->info('COMPRA CONFIRMADA: '.serialize($data));
+        logger()->info('CONFIRMED CHECKOUT: '.serialize($ticket));
 
         $this->reserveCoupons($raffle, $coupons);
 
