@@ -23,6 +23,7 @@ class CreateCouponsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('raffle_id')->references('id')->on('raffles');
+            $table->unique(['raffle_id', 'number']);
         });
     }
 
