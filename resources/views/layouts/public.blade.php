@@ -91,6 +91,9 @@
                 <!-- /.col-lg-12 -->
            </div>
             <div class="row">  
+                
+                @include('_errors')
+
                 @yield('section')
 
             </div>
