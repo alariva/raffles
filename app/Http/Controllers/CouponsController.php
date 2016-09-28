@@ -110,9 +110,9 @@ class CouponsController extends Controller
         $individualPrice = 40; // Currency
         $comboPrice = 60; // Currency
 
-        $comboNomber = 2; // Number of elements
+        $comboNumber = 2; // Number of elements
 
-        return $count % $comboNomber * $individualPrice + floor($count / $comboNomber) * $comboPrice;
+        return $count % $comboNumber * $individualPrice + floor($count / $comboNumber) * $comboPrice;
     }
 
     protected function couponsAreAvailable(Raffle $raffle, $coupons)
