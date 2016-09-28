@@ -39,6 +39,8 @@ class RaffleDealer
     // check
     public function isAvailable($number)
     {
+        $number = intval($number);
+
         if (!$this->range->valid($this->raffle->range, $number)) {
             return false;
         }
