@@ -1,13 +1,14 @@
 @extends('layouts.public')
-@section('page_heading','Coupons')
+@section('page_heading','Paso 1: Elegí tus números')
 @section('section')
 
+<div class="container-fluid">
 <div class="col-xs-6 col-md-6 col-md-offset-3">
     <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading">Rifas</div>
       <div class="panel-body">
-        <p>Elegí tu número</p>
+        <p>Estos son los números disponibles para reservar. Tu reserva será efectiva únicamente con tu comprobante de pago.</p>
       </div>
 
       <!-- List group -->
@@ -15,9 +16,9 @@
         @foreach($coupons as $coupon)
 
         @if(in_array($coupon, $selected))
-            <li class="list-group-item list-group-item-success">Numero {{ $coupon }}</li>
+            <li class="list-group-item list-group-item-success">N° {{ $coupon }} <i class="fa fa-check"></i></li>
         @else
-            <a href="{{ route('coupons.add', $coupon) }}"><button type="button" class="list-group-item">Numero {{ $coupon }} </button></a>
+            <a href="{{ route('coupons.add', $coupon) }}"><button type="button" class="list-group-item">N° {{ $coupon }} </button></a>
         @endif
         @endforeach
       </ul>
@@ -40,5 +41,8 @@
     </div>
     </div>
 </div>
+</div>
+
+@include('_footer')
 
 @stop
