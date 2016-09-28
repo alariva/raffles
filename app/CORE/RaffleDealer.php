@@ -45,7 +45,7 @@ class RaffleDealer
             return false;
         }
 
-        $coupon = Coupon::whereNumber($number)->whereNotIn('status', ['F'])->first();
+        $coupon = $this->raffle->coupons()->whereNumber($number)->whereNotIn('status', ['F'])->first();
 
         return $coupon === null;
     }
