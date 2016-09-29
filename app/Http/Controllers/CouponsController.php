@@ -41,6 +41,15 @@ class CouponsController extends Controller
         return view('coupons', compact('raffle', 'coupons', 'count', 'selected'));
     }
 
+    public function status(Raffle $raffle, $numbers)
+    {
+        logger()->info("STATUS {$raffle->slug} NUMBERS:{$numbers}");
+
+        $coupons = $raffle->coupons()->whereIn('number', explode(',', $numbers))->get();
+
+        return view('coupons-status', compact('raffle', 'coupons'));
+    }
+
     public function add($number)
     {
         $raffle = session('cart.raffle');
