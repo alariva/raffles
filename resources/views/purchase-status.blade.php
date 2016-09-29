@@ -42,6 +42,12 @@
                     ->withAttributes(['target' => '_blank']) !!}
       @endif
 
+        {!! Button::normal('Comprar más talones')
+                    ->large()
+                    ->block()
+                    ->prependIcon('<i class="fa fa-shopping-cart"></i>&nbsp;')
+                    ->asLinkTo(route('coupons.browse', session('cart.raffle'))) !!}
+
       <br/>
 
 </div>
