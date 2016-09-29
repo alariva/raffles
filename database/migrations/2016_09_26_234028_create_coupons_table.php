@@ -19,6 +19,7 @@ class CreateCouponsTable extends Migration
             $table->integer('number')->unsigned();
             $table->string('code')->nullable();
             $table->char('status', 1)->default('F');
+            $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

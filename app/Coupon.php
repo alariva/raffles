@@ -12,7 +12,7 @@ class Coupon extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'code', 'raffle_id', 'status'
+        'number', 'code', 'raffle_id', 'status', 'notes'
     ];
 
     public function raffle()

@@ -123,7 +123,7 @@ class CouponsController extends Controller
 
         logger()->info('CHECKOUT CONFIRMED: '.serialize($ticket));
 
-        $this->reserveCoupons($raffle, $coupons);
+        $this->reserveCoupons($raffle, $coupons, array_get($ticket, 'name'));
 
         $count = count($coupons);
 
@@ -151,12 +151,14 @@ class CouponsController extends Controller
         return redirect()->to($url);
     }
 
-    protected function reserveCoupons(Raffle $raffle, array $coupons)
+    protected function reserveCoupons(Raffle $raffle, array $coupons, $notes = null)
     {
         foreach ($coupons as $coupon) {
             $coupon = new Coupon([
                 'number' => $coupon,
+                'code'   => $coupon,
                 'status' => 'R',
+                'notes'  => $notes,
                 ]);
             $raffle->coupons()->save($coupon);
         }
