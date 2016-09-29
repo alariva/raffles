@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CORE\RaffleDealer;
 use App\Coupon;
+use App\Events\CouponWasPurchased;
 use App\Raffle;
 use Illuminate\Http\Request;
 
@@ -122,6 +123,8 @@ class CouponsController extends Controller
         $url = "https://www.cuentadigital.com/api.php?{$query}";
 
         logger()->info("CHECKOUT REDIRECT TO INVOICE:{$url}");
+
+        event(new CouponWasPurchased($raffle, $ticket));
 
         dd('Debug: Cool, you made it');
 
