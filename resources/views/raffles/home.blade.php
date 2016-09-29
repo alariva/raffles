@@ -6,15 +6,23 @@
 
     {!! Markdown::convertToHtml( $raffle->description ) !!}
 
-    @if($raffle->closed_at->isFuture())
-    {!! Alert::info('La entrega de talones cierra '.$raffle->closed_at->diffForHumans()) !!}
+    @if($raffle->opened_at->isFuture())
 
-    {!! Button::primary('Elegi tus numeros de la suerte acá')
-                ->block()
-                ->large()
-                ->asLinkTo(route('coupons.browse', $raffle)) !!}
+        {!! Alert::info('La entrega de talones abre '.$raffle->opened_at->diffForHumans()) !!}
+
     @else
-    {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->diffForHumans().'! Mucha suerte!') !!}
+
+        @if($raffle->closed_at->isFuture())
+        {!! Alert::info('La entrega de talones cierra '.$raffle->closed_at->diffForHumans()) !!}
+
+        {!! Button::primary('Elegi tus numeros de la suerte acá')
+                    ->block()
+                    ->large()
+                    ->asLinkTo(route('coupons.browse', $raffle)) !!}
+        @else
+        {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->diffForHumans().'! Mucha suerte!') !!}
+        @endif
+
     @endif
 
 </div>

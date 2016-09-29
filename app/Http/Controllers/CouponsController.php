@@ -83,6 +83,12 @@ class CouponsController extends Controller
 
     public function confirm(Raffle $raffle, Request $request)
     {
+        if ($raffle->opened_at->isFuture() || $raffle->closed_at->isPast()) {
+            logger()->info('ADVICE: RAFFLE IS NOT ACTIVE:'.serialize($raffle));
+
+            return redirect()->route('raffle.home', $raffle)->withError('La rifa no está activa');
+        }
+
         $this->validate($request, [
             'name'      => 'required|max:255',
             'email'     => 'required|email',
