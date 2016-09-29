@@ -9,6 +9,8 @@ class RaffleController extends Controller
 {
     public function home(Raffle $raffle)
     {
+        logger()->info("HOME:{$raffle->slug}");
+
         session()->put('cart.raffle', $raffle);
         session()->put('cart.numbers', []);
 
