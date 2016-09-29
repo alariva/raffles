@@ -3,7 +3,7 @@
 @section('section')
 
 <div class="container-fluid">
-<div class="col-xs-6 col-md-6 col-md-offset-3">
+<div class="col-xs-6 col-md-6 col-md-offset-3 col-sm-12">
     <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading">Quedan {{ $count }} talones disponibles</div>
