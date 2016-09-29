@@ -29,9 +29,11 @@ class CouponsController extends Controller
     {
         $selected = session('cart.numbers');
 
-        $coupons = $this->dealer->setRaffle($raffle)->browse();
+        $coupons = collect($this->dealer->setRaffle($raffle)->browse());
 
-        return view('coupons', compact('raffle', 'coupons', 'selected'));
+        $count = count($coupons);
+
+        return view('coupons', compact('raffle', 'coupons', 'count', 'selected'));
     }
 
     public function add($number)
@@ -101,6 +103,8 @@ class CouponsController extends Controller
             'codigo'   => 'RifaDKVM',
             'concepto' => $count.' talones: '.implode(',', $coupons),
             ]);
+
+        dd('Debug: Cool, you made it');
 
         return redirect()->to("https://www.cuentadigital.com/api.php?{$query}");
     }
