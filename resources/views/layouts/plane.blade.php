@@ -13,6 +13,8 @@
 	<meta content="alariva.com" name="author"/>
 
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
+    
+    {!! Analytics::render() !!}
 </head>
 <body>
 	@yield('body')

@@ -181,6 +181,7 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Bootstrapper\BootstrapperL5ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 
     ],
 
@@ -263,6 +264,9 @@ return [
 
         'Form'           => Collective\Html\FormFacade::class,
         'Html'           => Collective\Html\HtmlFacade::class,
+        
+        'Analytics'      => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
+
     ],
 
 ];
