@@ -33,4 +33,11 @@ class RangeTest extends TestCase
 
         $this->assertEquals($range, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }
+
+    public function test_generates_a_single_number_on_repetition()
+    {
+        $range = $this->range->create('7-7')->get();
+
+        $this->assertEquals($range, [7]);
+    }
 }
