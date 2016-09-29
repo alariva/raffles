@@ -33,7 +33,7 @@
 
     </div>
 
-      @if($purchase->url && $purchase->status <> 'P')
+      @if($purchase->url && !$purchase->isPaid())
         {!! Button::primary('Ticket de Pago')
                     ->large()
                     ->block()

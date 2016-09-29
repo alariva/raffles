@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CouponWasPurchased;
+use App\Purchase;
 use App\Raffle;
 use Carbon\Carbon;
 
@@ -36,7 +37,7 @@ class SendPurchaseNotification
     {
         $purchase = $raffle->purchases()->create([
             'hash'       => array_get($ticket, 'hash'),
-            'status'     => 'R',
+            'status'     => Purchase::STATUS_RESERVED,
             'details'    => json_encode($ticket),
             'url'        => array_get($ticket, 'url'),
             'expires_at' => Carbon::now()->addDays(3),

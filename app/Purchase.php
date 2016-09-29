@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
+    const STATUS_RESERVED = 'R';
+    const STATUS_PAID = 'P';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,5 +26,10 @@ class Purchase extends Model
     public function coupons()
     {
         return $this->hasMany(Coupon::class);
+    }
+
+    public function isPaid()
+    {
+        return $this->status == self::STATUS_PAID;
     }
 }
