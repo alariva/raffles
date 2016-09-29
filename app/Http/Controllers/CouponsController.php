@@ -122,8 +122,8 @@ class CouponsController extends Controller
 
     protected function calculatePrice($count)
     {
-        $individualPrice = 40; // Currency
-        $comboPrice = 60; // Currency
+        $individualPrice = 30; // Currency
+        $comboPrice = 50; // Currency
 
         $comboNumber = 2; // Number of elements
 
