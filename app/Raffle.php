@@ -24,6 +24,11 @@ class Raffle extends Model
         return $this->hasMany(Coupon::class);
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     /**
      * Get the route key for the model.
      *

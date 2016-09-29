@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coupon extends Model
+class Purchase extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Coupon extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'code', 'raffle_id', 'purchase_id', 'status', 'notes'
+        'details', 'expires_at', 'hash', 'status', 'raffle_id', 'url',
     ];
 
     public function raffle()
@@ -20,8 +20,8 @@ class Coupon extends Model
         return $this->belongsTo(Raffle::class);
     }
 
-    public function purchase()
+    public function coupons()
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->hasMany(Coupon::class);
     }
 }

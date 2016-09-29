@@ -19,39 +19,37 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-shopping-cart fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
+                    @if(session('cart.purchases'))
+                        @foreach(session('cart.purchases') as $purchase)
                         <li>
-                            <a href="#">
+                            <a href="{!! route('coupons.purchase', ['raffle' => session('cart.raffle'), 'hash' => $purchase]) !!}">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong>Ver compra</strong>
                                     <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                        <em></em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>{{ $purchase }}</div>
                             </a>
                         </li>
                         <li class="divider"></li>
+                        @endforeach
+                    @else
                         <li>
-                            <a href="#">
+                            <a href="{!! route('coupons.browse', ['raffle' => $raffle]) !!}">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong>No hiciste compras aún</strong>
                                     <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                        <em></em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>Comprar</div>
                             </a>
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
+                    @endif
                     </ul>
                     <!-- /.dropdown-messages -->
                 </li>
@@ -86,8 +84,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
            </div>
-            <div class="row">  
-                
+            <div class="row">
+
                 @include('_errors')
 
                 @yield('section')

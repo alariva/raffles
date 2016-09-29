@@ -6,6 +6,7 @@ use App\CORE\RaffleDealer;
 use App\Coupon;
 use App\Events\CouponWasPurchased;
 use App\Raffle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CouponsController extends Controller
@@ -47,7 +48,10 @@ class CouponsController extends Controller
 
         $coupons = $raffle->coupons()->whereIn('number', explode(',', $numbers))->get();
 
-        return view('coupons-status', compact('raffle', 'coupons'));
+        $paymentUrl = session('cart.paymentUrl');
+        $paymentExpires = session('cart.paymentExpires');
+
+        return view('coupons-status', compact('raffle', 'coupons', 'paymentUrl', 'paymentExpires'));
     }
 
     public function add($number)
@@ -111,57 +115,50 @@ class CouponsController extends Controller
 
         $ticket = $request->only(['name', 'email', 'tel', 'city']);
 
-        $coupons = session('cart.numbers');
+        $numbers = session('cart.numbers');
 
-        $ticket['numbers'] = $coupons;
+        array_set($ticket, 'numbers', $numbers);
 
-        if (!$this->couponsAreAvailable($raffle, $coupons)) {
-            logger()->info('ADVICE: COMPOUND COLLISION (confirm): At least one of the coupons is already taken:'.serialize($coupons));
+        if (!$this->couponsAreAvailable($raffle, $numbers)) {
+            logger()->info('ADVICE: COMPOUND COLLISION (confirm): At least one of the coupons is already taken:'.serialize($numbers));
 
             return redirect()->route('raffle.home', $raffle)->withError('Al menos uno de los numeros ya fue reservado');
         }
 
         logger()->info('CHECKOUT CONFIRMED: '.serialize($ticket));
 
-        $this->reserveCoupons($raffle, $coupons, array_get($ticket, 'name'));
+        $coupons = $this->reserveCoupons($raffle, $numbers, array_get($ticket, 'name'));
 
-        $count = count($coupons);
+        $paymentUrl = $this->generatePaymentUrl($numbers);
 
-        $price = $this->calculatePrice($count);
+        $hash = md5($paymentUrl);
 
-        logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
+        array_set($ticket, 'url', $paymentUrl);
+        array_set($ticket, 'hash', $hash);
 
-        // id=516862&precio=15,30&venc=7&codigo=15&hacia=website2@website2.com&concepto=hosting plan 4
-        $query = http_build_query([
-            'id'       => 516862,
-            'precio'   => $price,
-            'venc'     => 3,
-            'codigo'   => 'TR-DKVM-'.implode(',', $coupons),
-            'concepto' => $count.' talones: '.implode(',', $coupons),
-            ]);
+        session()->push('cart.purchases', $hash);
 
-        $url = "https://www.cuentadigital.com/api.php?{$query}";
+        event(new CouponWasPurchased($raffle, $coupons, $ticket));
 
-        logger()->info("CHECKOUT REDIRECT TO INVOICE:{$url}");
+        $purchase = $raffle->purchases()->whereHash($hash)->first();
 
-        event(new CouponWasPurchased($raffle, $ticket));
-
-        dd('Debug: Cool, you made it');
-
-        return redirect()->to($url);
+        return view('purchase-status', compact('purchase'));
     }
 
-    protected function reserveCoupons(Raffle $raffle, array $coupons, $notes = null)
+    protected function reserveCoupons(Raffle $raffle, array $numbers, $notes = null)
     {
-        foreach ($coupons as $coupon) {
+        $coupons = [];
+        foreach ($numbers as $number) {
             $coupon = new Coupon([
-                'number' => $coupon,
-                'code'   => $coupon,
+                'number' => $number,
+                'code'   => $number,
                 'status' => 'R',
                 'notes'  => $notes,
                 ]);
             $raffle->coupons()->save($coupon);
+            $coupons[] = $coupon;
         }
+        return $coupons;
     }
 
     protected function calculatePrice($count)
@@ -187,5 +184,29 @@ class CouponsController extends Controller
         }
 
         return true;
+    }
+
+    protected function generatePaymentUrl($coupons)
+    {
+        $count = count($coupons);
+
+        $price = $this->calculatePrice($count);
+
+        logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
+
+        // id=516862&precio=15,30&venc=7&codigo=15&hacia=website2@website2.com&concepto=hosting plan 4
+        $query = http_build_query([
+            'id'       => 516862,
+            'precio'   => $price,
+            'venc'     => 3,
+            'codigo'   => 'TR-DKVM-'.implode(',', $coupons),
+            'concepto' => $count.' talones: '.implode(',', $coupons),
+            ]);
+
+        $paymentUrl = "https://www.cuentadigital.com/api.php?{$query}";
+
+        logger()->info("GENERATED PAYMENT URL:{$paymentUrl}");
+
+        return $paymentUrl;
     }
 }

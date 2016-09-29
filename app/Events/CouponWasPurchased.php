@@ -20,6 +20,11 @@ class CouponWasPurchased
     /**
      * @var array
      */
+    public $coupons;
+
+    /**
+     * @var array
+     */
     public $ticket;
 
     /**
@@ -27,9 +32,11 @@ class CouponWasPurchased
      *
      * @return void
      */
-    public function __construct(Raffle $raffle, array $ticket)
+    public function __construct(Raffle $raffle, array $coupons, array $ticket)
     {
         $this->raffle = $raffle;
+
+        $this->coupons = $coupons;
 
         $this->ticket = $ticket;
     }

@@ -16,6 +16,7 @@ class CreateCouponsTable extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('raffle_id')->unsigned()->index();
+            $table->integer('purchase_id')->unsigned()->index()->nullable();
             $table->integer('number')->unsigned();
             $table->string('code')->nullable();
             $table->char('status', 1)->default('F');
@@ -23,6 +24,7 @@ class CreateCouponsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('purchase_id')->references('id')->on('purchases');
             $table->foreign('raffle_id')->references('id')->on('raffles');
             $table->unique(['raffle_id', 'number']);
         });

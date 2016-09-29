@@ -20,6 +20,11 @@ Route::get('/{raffle}', [
     'uses' => 'RaffleController@home',
 ]);
 
+Route::get('/{raffle}/purchases', [
+    'as'   => 'raffle.purchases',
+    'uses' => 'PurchaseController@index',
+]);
+
 Route::get('/{raffle}/coupons', [
     'as'   => 'coupons.browse',
     'uses' => 'CouponsController@browse',
@@ -48,4 +53,9 @@ Route::get('/coupons/add/{number}', [
 Route::get('/coupons/reset', [
     'as'   => 'coupons.reset',
     'uses' => 'CouponsController@reset',
+]);
+
+Route::get('/{raffle}/purchase/{hash}', [
+    'as'   => 'coupons.purchase',
+    'uses' => 'PurchaseController@status',
 ]);

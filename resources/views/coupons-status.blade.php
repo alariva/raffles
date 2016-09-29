@@ -10,7 +10,7 @@
 
       <div class="panel-body">
 
-      @foreach($coupons as $coupon)
+      @foreach($purchase->coupons as $coupon)
         @if($coupon->status == 'R')
           {!! Alert::warning("El cupón N° {$coupon->code} está reservado pendiente de pago hasta {$coupon->created_at->addDays(3)->toDateString()} a nombre de {$coupon->notes}.") !!}
         @elseif($coupon->status == 'P')
@@ -20,11 +20,11 @@
         @else
           {!! Alert::warning("El cupón N° {$coupon->code} está reservado.") !!}
         @endif
-      @endforeach
 
       </div>
 
     </div>
+
 </div>
 </div>
 
