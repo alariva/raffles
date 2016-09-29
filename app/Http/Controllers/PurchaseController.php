@@ -27,6 +27,6 @@ class PurchaseController extends Controller
             return redirect()->route('raffle.home', $raffle);
         }
 
-        return view('purchase-status', compact('raffle', 'purchase'));
+        return view('purchases.status', compact('raffle', 'purchase'));
     }
 }
