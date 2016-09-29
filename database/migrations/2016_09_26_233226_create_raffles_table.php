@@ -18,7 +18,9 @@ class CreateRafflesTable extends Migration
             $table->string('slug')->index();
             $table->string('name');
             $table->longText('description');
+            $table->datetime('opened_at');
             $table->datetime('closed_at');
+            $table->string('email')->nullable();
             $table->string('range')->nullable();
             $table->string('redirect_url')->nullable();
             $table->timestamps();

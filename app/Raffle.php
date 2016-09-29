@@ -12,11 +12,11 @@ class Raffle extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'description', 'redirect_url', 'closed_at', 'range',
+        'name', 'slug', 'description', 'redirect_url', 'opened_at', 'closed_at', 'range', 'email',
     ];
 
     protected $dates = [
-        'closed_at',
+        'opened_at', 'closed_at',
     ];
 
     public function coupons()
