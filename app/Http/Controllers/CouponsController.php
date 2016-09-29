@@ -61,7 +61,7 @@ class CouponsController extends Controller
         if (!$this->couponsAreAvailable($raffle, $number)) {
             logger()->info("ADVICE: INDIVIDUAL COLLISION: The coupon is already taken:{$number}, redirecting back");
 
-            return redirect()->route('coupons.browse', $raffle)->withError("El numero {$number} ya fue reservado");
+            return redirect()->route('coupons.browse', $raffle)->withErrors("El numero {$number} ya fue reservado");
         }
 
         session()->push('cart.numbers', $number);
@@ -90,7 +90,7 @@ class CouponsController extends Controller
         if (!$this->couponsAreAvailable($raffle, $coupons)) {
             logger()->info('ADVICE: COMPOUND COLLISION (checkout): At least one of the coupons is already taken:'.serialize($coupons));
 
-            return redirect()->route('raffle.home', $raffle)->withError('Al menos uno de los numeros ya fue reservado');
+            return redirect()->route('raffle.home', $raffle)->withErrors('Al menos uno de los numeros ya fue reservado');
         }
 
         $price = $this->calculatePrice(count($coupons));
@@ -103,7 +103,7 @@ class CouponsController extends Controller
         if ($raffle->opened_at->isFuture() || $raffle->closed_at->isPast()) {
             logger()->info('ADVICE: RAFFLE IS NOT ACTIVE:'.serialize($raffle));
 
-            return redirect()->route('raffle.home', $raffle)->withError('La rifa no está activa');
+            return redirect()->route('raffle.home', $raffle)->withErrors('La rifa no está activa');
         }
 
         $this->validate($request, [
@@ -122,7 +122,7 @@ class CouponsController extends Controller
         if (!$this->couponsAreAvailable($raffle, $numbers)) {
             logger()->info('ADVICE: COMPOUND COLLISION (confirm): At least one of the coupons is already taken:'.serialize($numbers));
 
-            return redirect()->route('raffle.home', $raffle)->withError('Al menos uno de los numeros ya fue reservado');
+            return redirect()->route('raffle.home', $raffle)->withErrors('Al menos uno de los numeros ya fue reservado');
         }
 
         logger()->info('CHECKOUT CONFIRMED: '.serialize($ticket));
