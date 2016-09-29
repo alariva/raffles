@@ -16,6 +16,8 @@ class RaffleController extends Controller
 
         Carbon::setLocale('es');
 
-        return view('raffles.home', compact('raffle'));
+        $reservedCount = $raffle->coupons()->where('status', '<>', 'F')->count();
+
+        return view('raffles.home', compact('raffle', 'reservedCount'));
     }
 }

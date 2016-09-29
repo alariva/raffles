@@ -23,6 +23,10 @@ class PurchaseController extends Controller
 
         $purchase = $raffle->purchases()->whereHash($hash)->first();
 
+        if (!$purchase) {
+            return redirect()->route('raffle.home', $raffle);
+        }
+
         return view('purchase-status', compact('raffle', 'purchase'));
     }
 }

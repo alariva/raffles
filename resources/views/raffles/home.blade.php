@@ -12,6 +12,12 @@
 
     @else
 
+    <div class="row">
+    <div class="col-lg-3 col-md-6">
+        @include('widgets.box', ['color' => 'green', 'icon' => 'tags', 'count' => $reservedCount, 'label' => 'Talones Reservados', 'url' => route('coupons.browse', $raffle), 'linkLabel' => 'Reservar'])
+    </div>
+    <div class="col-lg-9 col-md-6">
+
         @if($raffle->closed_at->isFuture())
         {!! Alert::info('La entrega de talones cierra '.$raffle->closed_at->diffForHumans()) !!}
 
@@ -22,6 +28,9 @@
         @else
         {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->diffForHumans().'! Mucha suerte!') !!}
         @endif
+
+    </div>
+    </div>
 
     @endif
 
