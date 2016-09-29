@@ -100,7 +100,7 @@ class CouponsController extends Controller
             'id'       => 516862,
             'precio'   => $price,
             'venc'     => 3,
-            'codigo'   => 'RifaDKVM',
+            'codigo'   => 'TR-DKVM-'.implode(',', $coupons),
             'concepto' => $count.' talones: '.implode(',', $coupons),
             ]);
 
