@@ -95,9 +95,18 @@ return [
     |
     */
 
-    'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    'custom' => [
+        'accept_terms' => [
+            'required' => 'Debés aceptar las bases y condiciones para participar',
+        ],
+        'tel' => [
+            'required' => 'Necesitamos un número de teléfono para contactarte en caso de ganar',
+        ],
+        'name' => [
+            'required' => 'Dinos tu nombre',
+        ],
+        'city' => [
+            'required' => 'Necesitamos saber en qué ciudad estás',
         ],
     ],
 

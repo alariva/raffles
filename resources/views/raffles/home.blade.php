@@ -30,7 +30,16 @@
         @endif
 
     </div>
+
     </div>
+
+        @if($terms)
+            <button class="btn btn-normal btn-lg btn-block" data-toggle="modal" data-target="#myModal">
+                Bases y Condiciones
+            </button>
+
+            @include('raffles._terms', compact('terms'))
+        @endif
 
     @endif
 

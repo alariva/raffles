@@ -44,6 +44,18 @@
         <div class="col-sm-12">
           <div class="checkbox">
               <label style="font-size: 1em">
+                  <input type="checkbox" name="accept_terms" value="yes">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                  Acepto las Bases y Condiciones del sorteo
+              </label>
+          </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+        <div class="col-sm-12">
+          <div class="checkbox">
+              <label style="font-size: 1em">
                   <input type="checkbox" name="contactme" value="yes" >
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   Pertenezco a un club/grupo y quiero organizar un sorteo similar, por favor contactarme.

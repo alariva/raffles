@@ -102,15 +102,18 @@ class CouponsController extends Controller
 
             return redirect()->route('raffle.home', $raffle)->withErrors('La rifa no está activa');
         }
+        
+        $ticket = $request->only(['name', 'email', 'tel', 'city', 'contactme', 'accept_terms']);
+
+        logger()->info('CHECKOUT CONFIRM ATTEMPT:'.serialize($ticket));
 
         $this->validate($request, [
-            'name'      => 'required|max:255',
-            'email'     => 'required|email',
-            'tel'       => 'required|max:16',
-            'city'      => 'required|max:100',
+            'accept_terms' => 'required|in:yes',
+            'name'         => 'required|max:255',
+            'email'        => 'required|email',
+            'tel'          => 'required|max:16',
+            'city'         => 'required|max:100',
         ]);
-
-        $ticket = $request->only(['name', 'email', 'tel', 'city', 'contactme']);
 
         $numbers = session('cart.numbers');
 

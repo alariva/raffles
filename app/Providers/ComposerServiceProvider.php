@@ -14,7 +14,6 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Using Closure based composers...
         View::composer('layouts.public', function ($view) {
             $view->with('raffle', session('cart.raffle'));
         });
