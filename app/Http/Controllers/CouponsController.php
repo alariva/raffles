@@ -48,10 +48,7 @@ class CouponsController extends Controller
 
         $coupons = $raffle->coupons()->whereIn('number', explode(',', $numbers))->get();
 
-        $paymentUrl = session('cart.paymentUrl');
-        $paymentExpires = session('cart.paymentExpires');
-
-        return view('coupons-status', compact('raffle', 'coupons', 'paymentUrl', 'paymentExpires'));
+        return view('coupons-status', compact('raffle', 'coupons'));
     }
 
     public function add($number)
