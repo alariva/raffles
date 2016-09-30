@@ -75,3 +75,12 @@ Route::get('/{raffle}/purchase/{hash}', [
     'as'   => 'coupons.purchase',
     'uses' => 'PurchaseController@status',
 ]);
+
+////////////////
+// Backoffice //
+////////////////
+
+Route::get('/{raffle}/backoffice/purchases/{password}', [
+    'as'   => 'backoffice.purchases',
+    'uses' => 'Backoffice\PurchaseController@index',
+]);
