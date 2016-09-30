@@ -66,7 +66,7 @@
                                 <div class="caption">
                                     <h3>{{ $raffle->name }}</h3>
                                     <p class="text-muted">
-                                        <small>Potenciado por <a target="_blank" href="https://alariva.com">alariva.com</a></small>
+                                        <small>Potenciado por <a target="_blank" href="https://alariva.com">alariva.com</a> y <a href="https://www.pega.sh/">pega.sh</a></small>
                                     </p>
                                 </div>
                             </div>
