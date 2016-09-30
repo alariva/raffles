@@ -60,6 +60,17 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        <li>
+                            <div class="text-center">
+                                <img width="80%" src="{{ URL::to('/') }}/img/{{ $raffle->slug }}.png"/ alt="{{ $raffle->name }}" style="padding:10px">
+                                <div class="caption">
+                                    <h3>{{ $raffle->name }}</h3>
+                                    <p class="text-muted">
+                                        <small>Potenciado por <a target="_blank" href="https://alariva.com">alariva.com</a></small>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
                     @if($raffle = session('cart.raffle'))
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ route('raffle.home', $raffle)}}"><i class="fa fa-undo fa-fw"></i> Recomenzar</a>
@@ -88,7 +99,7 @@
 
                 @include('_errors')
 
-                @yield('section')
+                @yield('section')              
 
             </div>
             <!-- /#page-wrapper -->
