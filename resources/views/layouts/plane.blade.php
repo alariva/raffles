@@ -15,6 +15,11 @@
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
     
     {!! Analytics::render() !!}
+
+    <style type="text/css">
+    @stack('style')
+    </style>
+
 </head>
 <body>
 	@yield('body')

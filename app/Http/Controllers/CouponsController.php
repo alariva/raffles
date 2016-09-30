@@ -113,7 +113,7 @@ class CouponsController extends Controller
             'city'      => 'required|max:100',
         ]);
 
-        $ticket = $request->only(['name', 'email', 'tel', 'city']);
+        $ticket = $request->only(['name', 'email', 'tel', 'city', 'contactme']);
 
         $numbers = session('cart.numbers');
 
