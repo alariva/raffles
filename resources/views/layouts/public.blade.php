@@ -62,7 +62,7 @@
                     <ul class="nav" id="side-menu">
                         <li>
                             <div class="text-center">
-                                <img width="80%" src="{{ URL::to('/') }}/img/{{ $raffle->slug }}.png"/ alt="{{ $raffle->name }}" style="padding:10px">
+                                <img width="80%" src="{{ URL::to('/') }}/img/{{ $raffle->slug }}"/ alt="{{ $raffle->name }}" style="padding:10px">
                                 <div class="caption">
                                     <h3>{{ $raffle->name }}</h3>
                                     <p class="text-muted">

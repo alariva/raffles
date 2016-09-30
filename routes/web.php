@@ -12,7 +12,7 @@
 */
 
 Route::get('img/{filename}', function ($filename) {
-    $path = storage_path('app/'.$filename);
+    $path = storage_path('app/'.$filename.'.png');
 
     if (!File::exists($path)) {
         abort(404);
