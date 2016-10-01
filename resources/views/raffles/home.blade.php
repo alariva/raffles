@@ -19,7 +19,7 @@
     <div class="col-lg-9 col-md-6">
 
         @if($raffle->closed_at->isFuture())
-        {!! Alert::info('La entrega de talones cierra '.$raffle->closed_at->diffForHumans()) !!}
+        {!! Alert::info("La entrega de talones cierra {$raffle->closed_at->diffForHumans()} ({$raffle->closed_at->toDateString()})") !!}
 
         {!! Button::primary('Elegi tus numeros de la suerte acá')
                     ->block()
