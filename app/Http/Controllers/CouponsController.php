@@ -100,7 +100,7 @@ class CouponsController extends Controller
         if ($raffle->opened_at->isFuture() || $raffle->closed_at->isPast()) {
             logger()->info('ADVICE: RAFFLE IS NOT ACTIVE:'.serialize($raffle));
 
-            return redirect()->route('raffle.home', $raffle)->withErrors('La rifa no está activa');
+            return redirect()->route('raffle.home', $raffle)->withErrors('La campaña no está activa');
         }
         
         $ticket = $request->only(['name', 'email', 'tel', 'city', 'contactme', 'accept_terms']);
