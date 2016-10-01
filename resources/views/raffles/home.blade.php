@@ -19,14 +19,14 @@
     <div class="col-lg-9 col-md-6">
 
         @if($raffle->closed_at->isFuture())
-        {!! Alert::info("La entrega de talones cierra {$raffle->closed_at->diffForHumans()} ({$raffle->closed_at->toDateString()})") !!}
+        {!! Alert::info("La entrega de talones cierra {$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->diffForHumans()} ({$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->toDateTimeString()})") !!}
 
         {!! Button::primary('Elegi tus numeros de la suerte acá')
                     ->block()
                     ->large()
                     ->asLinkTo(route('coupons.browse', $raffle)) !!}
         @else
-        {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->diffForHumans().'! Mucha suerte!') !!}
+        {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->diffForHumans().'! Mucha suerte!') !!}
         @endif
 
     </div>
