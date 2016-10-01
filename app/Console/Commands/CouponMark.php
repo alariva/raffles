@@ -56,16 +56,23 @@ class CouponMark extends Command
         $numbers = $this->range->create($rangeString)->get();
 
         foreach ($numbers as $number) {
-            $this->info("NUMBER {$number} SET TO {$status}");
+            $code = str_pad($number, 3, '0', STR_PAD_LEFT);
+            $signature = $this->sign($raffleSlug, $code);
+            $this->info("{$code};{$signature};{$status};{$number};{$notes}");
             $raffle->coupons()->updateOrCreate([
                 'number' => $number,
                 ], [
-                'code'   => str_pad($number, 3, '0', STR_PAD_LEFT),
+                'code'   => $code,
                 'status' => $status,
-                'notes'  => $notes,
+                'notes'  => $notes.':'.$signature,
                 ]);
         }
 
         $this->info('DONE');
+    }
+
+    protected function sign($raffleSlug, $code)
+    {
+        return md5('alariva.com+'.strtoupper($raffleSlug).'+'.$code);
     }
 }
