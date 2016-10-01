@@ -76,11 +76,17 @@
 
       <div class="panel-footer">
 
-        {!! Button::success("Confirmar Rifas (\$ {$price})")
+        {!! Button::success("Confirmar Talones (\$ {$price})")
                     ->block()
                     ->large()
                     ->prependIcon('<i class="fa fa-shopping-cart" aria-hidden="true"></i>')
                     ->submit() !!}
+
+        {!! Button::normal("Agregar más talones")
+                    ->block()
+                    ->large()
+                    ->prependIcon('<i class="fa fa-plus" aria-hidden="true"></i>')
+                    ->asLinkTo(route('coupons.browse', $raffle)) !!}
 
       </div>
     </div>

@@ -67,7 +67,7 @@ class CouponsController extends Controller
 
         $numbers = session('cart.numbers');
 
-        if (count($numbers) >= 2) {
+        if (count($numbers) % 2 == 0) {
             logger()->info('AUTOREDIRECTING TO CHECKOUT');
 
             return redirect()->route('coupons.checkout', $raffle);
