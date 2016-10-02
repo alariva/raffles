@@ -129,10 +129,17 @@ class CouponsController extends Controller
 
         $coupons = $this->reserveCoupons($raffle, $numbers, array_get($ticket, 'name'));
 
-        $paymentUrl = $this->generatePaymentUrl($numbers);
+        $count = count($coupons);
+
+        $price = $this->calculatePrice($count);
+
+        logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
+
+        $paymentUrl = $this->generatePaymentUrl($numbers, $price);
 
         $hash = md5($paymentUrl);
 
+        array_set($ticket, 'price', $price);
         array_set($ticket, 'url', $paymentUrl);
         array_set($ticket, 'hash', $hash);
 
@@ -186,13 +193,9 @@ class CouponsController extends Controller
         return true;
     }
 
-    protected function generatePaymentUrl($coupons)
+    protected function generatePaymentUrl($coupons, $price)
     {
         $count = count($coupons);
-
-        $price = $this->calculatePrice($count);
-
-        logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
 
         // id=516862&precio=15,30&venc=7&codigo=15&hacia=website2@website2.com&concepto=hosting plan 4
         $query = http_build_query([

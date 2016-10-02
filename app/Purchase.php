@@ -15,7 +15,7 @@ class Purchase extends Model
      * @var array
      */
     protected $fillable = [
-        'details', 'expires_at', 'hash', 'status', 'raffle_id', 'url',
+        'details', 'expires_at', 'hash', 'status', 'price', 'raffle_id', 'url',
     ];
 
     public function raffle()

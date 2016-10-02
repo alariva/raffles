@@ -38,6 +38,7 @@ class SendPurchaseNotification
         $purchase = $raffle->purchases()->create([
             'hash'       => array_get($ticket, 'hash'),
             'status'     => Purchase::STATUS_RESERVED,
+            'price'      => array_get($ticket, 'price'),
             'details'    => json_encode($ticket),
             'url'        => array_get($ticket, 'url'),
             'expires_at' => Carbon::now()->addDays(3),
