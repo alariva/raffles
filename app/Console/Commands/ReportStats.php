@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Coupon;
 use App\Purchase;
+use App\Raffle;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class ReportStats extends Command
@@ -13,7 +14,7 @@ class ReportStats extends Command
      *
      * @var string
      */
-    protected $signature = 'report:stats';
+    protected $signature = 'report:stats {raffle}';
 
     /**
      * The console command description.
@@ -39,12 +40,31 @@ class ReportStats extends Command
      */
     public function handle()
     {
-        $purchasesCount = Purchase::count();
-        $purchasesReservedCount = Purchase::whereStatus(Purchase::STATUS_RESERVED)->count();
-        $purchasesPaidCount = Purchase::whereStatus(Purchase::STATUS_PAID)->count();
+        $raffleSlug = $this->argument('raffle');
 
-        $this->info("Purchases: $purchasesCount");
-        $this->info("  Reserved: $purchasesReservedCount");
-        $this->info("  Paid: $purchasesPaidCount");
+        $raffle = Raffle::whereSlug($raffleSlug)->firstOrFail();
+
+        $purchases = $raffle->purchases;
+        $purchasesReserved = $raffle->purchases()->whereStatus(Purchase::STATUS_RESERVED)->get();
+        $purchasesPaid = $raffle->purchases()->whereStatus(Purchase::STATUS_PAID)->get();
+
+        $this->info('Purchases');
+
+        $headers = ['Date', 'Reserved Count', 'Reserved Price', 'Paid Count', 'Paid Price'];
+
+        $data = [
+            'Date'           => Carbon::now()->timezone('America/Argentina/Buenos_Aires')->toDateString(),
+            'Reserved Count' => $purchasesReserved->count(),
+            'Reserved Price' => $purchasesReserved->sum('price'),
+            'Paid Count'     => $purchasesPaid->count(),
+            'Paid Price'     => $purchasesPaid->sum('price'),
+        ];
+
+        $this->table($headers, [$data]);
+
+        $totalCount = $data['Reserved Count'] + $data['Paid Count'];
+        $totalPrice = $data['Reserved Price'] + $data['Paid Price'];
+
+        $this->info("Total: {$totalCount} Price: {$totalPrice}");
     }
 }
