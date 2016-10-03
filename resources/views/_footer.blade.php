@@ -32,9 +32,7 @@
 
     <div class="media">
       <div class="media-left">
-        <a href="http://www.quinielanacional.com.ar/loteria/quinielas-nocturnas" target="_blank">
           <img class="media-object" height="96" width="96" src="{!! asset('img/logo-loteria-nacional.jpg') !!}" alt="Loteria Nacional">
-        </a>
       </div>
       <div class="media-body">
         <h4 class="media-heading">Sobre el sorteo</h4>
