@@ -3,7 +3,7 @@
 @section('section')
 
 {!! Form::open(['route' => ['coupons.confirm', $raffle], 'class' => 'form-horizontal']) !!}
-<div class="col-xs-6 col-md-8 col-sm-12 col-md-offset-2">
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
     <div class="panel panel-default">
       <!-- Default panel contents -->
