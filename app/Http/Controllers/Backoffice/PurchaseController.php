@@ -18,7 +18,7 @@ class PurchaseController extends Controller
         $purchases = $raffle->purchases()->get()->toArray();
 
         $data = array_map(function ($item) {
-            return array_only($item, ['hash', 'created_at', 'expires_at', 'status', 'url']);
+            return array_only($item, ['hash', 'created_at', 'expires_at', 'status', 'url', 'price']);
         }, $purchases);
 
         return view('backoffice.purchases.index', compact('raffle', 'data'));
@@ -26,6 +26,6 @@ class PurchaseController extends Controller
 
     protected function passwordIsValid($slug, $password)
     {
-        return $password != md5(date('Ymd').'*'.strtoupper($slug));
+        return $password != md5(date('Ym').'*'.strtoupper($slug));
     }
 }
