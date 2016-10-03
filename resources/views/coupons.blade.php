@@ -3,6 +3,11 @@
 @section('section')
 
 <div class="container-fluid">
+
+<a href="#next" class="scroll-down" style="display: inline;">
+  <i class="fa fa-arrow-down" title="Continuar"></i>
+</a>
+
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
     <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -42,7 +47,7 @@
 
         @endforeach
       </ul>
-    <div class="panel-footer">
+    <div class="panel-footer" id="next">
 
     @if(count($selected)>0)
 
@@ -66,3 +71,42 @@
 @include('_footer')
 
 @stop
+
+@push('scripts')
+<script type="text/javascript">
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+@endpush
+
+@push('style')
+.scroll-down {
+  background: none;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 70px;
+  height: 70px;
+  z-index: 100;
+  display: none;
+  text-decoration: none;
+  color: #3C763D;
+}
+
+.scroll-down i {
+  font-size: 3em;
+}
+@endpush

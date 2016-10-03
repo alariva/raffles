@@ -19,10 +19,10 @@
     <style type="text/css">
     @stack('style')
     </style>
-
 </head>
 <body>
 	@yield('body')
 	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
+    @stack('scripts')
 </body>
 </html>
