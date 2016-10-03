@@ -14,9 +14,9 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layouts.public', function ($view) {
-            $view->with('raffle', session('cart.raffle'));
-        });
+//        View::composer('layouts.public', function ($view) {
+//            $view->with('raffle', session('cart.raffle'));
+//        });
     }
 
     /**

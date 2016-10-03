@@ -31,35 +31,53 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{raffle}', [
-    'as'   => 'raffle.home',
-    'uses' => 'RaffleController@home',
-]);
+Route::group(['prefix' => '{raffle}'], function() {
 
-Route::get('/{raffle}/purchases', [
-    'as'   => 'raffle.purchases',
-    'uses' => 'PurchaseController@index',
-]);
+    Route::get('', [
+        'as'   => 'raffle.home',
+        'uses' => 'RaffleController@home',
+    ]);
+    
+    Route::get('/purchases', [
+        'as'   => 'raffle.purchases',
+        'uses' => 'PurchaseController@index',
+    ]);
 
-Route::get('/{raffle}/coupons', [
-    'as'   => 'coupons.browse',
-    'uses' => 'CouponsController@browse',
-]);
+    Route::get('/coupons', [
+        'as'   => 'coupons.browse',
+        'uses' => 'CouponsController@browse',
+    ]);
 
-Route::get('/{raffle}/status/{numbers}', [
-    'as'   => 'coupons.status',
-    'uses' => 'CouponsController@status',
-]);
+    Route::get('/status/{numbers}', [
+        'as'   => 'coupons.status',
+        'uses' => 'CouponsController@status',
+    ]);
 
-Route::post('/{raffle}/confirm', [
-    'as'   => 'coupons.confirm',
-    'uses' => 'CouponsController@confirm',
-]);
+    Route::post('/confirm', [
+        'as'   => 'coupons.confirm',
+        'uses' => 'CouponsController@confirm',
+    ]);
 
-Route::get('/{raffle}/checkout', [
-    'as'   => 'coupons.checkout',
-    'uses' => 'CouponsController@checkout',
-]);
+    Route::get('/checkout', [
+        'as'   => 'coupons.checkout',
+        'uses' => 'CouponsController@checkout',
+    ]);
+
+    Route::get('/purchase/{hash}', [
+        'as'   => 'coupons.purchase',
+        'uses' => 'PurchaseController@status',
+    ]);
+
+    ////////////////
+    // Backoffice //
+    ////////////////
+
+    Route::get('/backoffice/purchases/{password}', [
+        'as'   => 'backoffice.purchases',
+        'uses' => 'Backoffice\PurchaseController@index',
+    ]);
+
+});
 
 Route::get('/coupons/add/{number}', [
     'as'   => 'coupons.add',
@@ -69,18 +87,4 @@ Route::get('/coupons/add/{number}', [
 Route::get('/coupons/reset', [
     'as'   => 'coupons.reset',
     'uses' => 'CouponsController@reset',
-]);
-
-Route::get('/{raffle}/purchase/{hash}', [
-    'as'   => 'coupons.purchase',
-    'uses' => 'PurchaseController@status',
-]);
-
-////////////////
-// Backoffice //
-////////////////
-
-Route::get('/{raffle}/backoffice/purchases/{password}', [
-    'as'   => 'backoffice.purchases',
-    'uses' => 'Backoffice\PurchaseController@index',
 ]);

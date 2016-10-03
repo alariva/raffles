@@ -10,7 +10,7 @@ class PurchaseController extends Controller
     {
         logger()->info("PURCHASE INDEX {$raffle->slug}");
 
-        $purchasesHashes = session('cart.purchases');
+        $purchasesHashes = session('cart.purchases', []);
 
         $purchases = $raffle->purchases()->whereIn('hash', $purchasesHashes)->get();
 

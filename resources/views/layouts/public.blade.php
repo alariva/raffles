@@ -23,9 +23,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                     @if(session('cart.purchases'))
-                        @foreach(session('cart.purchases') as $purchase)
+                        @forelse(session('cart.purchases') as $purchase)
                         <li>
-                            <a href="{!! route('coupons.purchase', ['raffle' => session('cart.raffle'), 'hash' => $purchase]) !!}">
+                            <a href="{!! route('coupons.purchase', ['raffle' => $raffle, 'hash' => $purchase]) !!}">
                                 <div>
                                     <strong>Ver compra</strong>
                                     <span class="pull-right text-muted">
@@ -36,8 +36,7 @@
                             </a>
                         </li>
                         <li class="divider"></li>
-                        @endforeach
-                    @else
+                        @empty
                         <li>
                             <a href="{!! route('coupons.browse', ['raffle' => $raffle]) !!}">
                                 <div>
@@ -49,6 +48,7 @@
                                 <div>Comprar</div>
                             </a>
                         </li>
+                        @endforelse
                     @endif
                     </ul>
                     <!-- /.dropdown-messages -->
