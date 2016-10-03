@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">{{ $raffle->name or 'Couponic'}}</a>
+                <a class="navbar-brand" href="{{ url ('') }}">Couponic</a>
             </div>
             <!-- /.navbar-header -->
 
