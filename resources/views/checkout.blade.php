@@ -22,14 +22,14 @@
         <div class="form-group">
         {!! Form::label('email', 'Tu email', ['class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-8">
-          {!! Form::text('email', '', ['class' => 'form-control input-lg', 'placeholder' => 'juanperez@ejemplo.com']) !!}
+          {!! Form::email('email', '', ['class' => 'form-control input-lg', 'placeholder' => 'juanperez@ejemplo.com']) !!}
         </div>
         </div>
 
         <div class="form-group">
         {!! Form::label('tel', 'Tu teléfono', ['class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-8">
-        {!! Form::text('tel', '', ['class' => 'form-control input-lg', 'placeholder' => '1568088592']) !!}
+        {!! Form::tel('tel', '', ['class' => 'form-control input-lg', 'placeholder' => '1568088592']) !!}
         </div>
         </div>
 
