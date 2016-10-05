@@ -58,14 +58,18 @@ class CouponMark extends Command
         foreach ($numbers as $number) {
             $code = str_pad($number, 3, '0', STR_PAD_LEFT);
             $signature = $this->sign($raffleSlug, $code);
-            $this->info("{$code};{$signature};{$status};{$number};{$notes}");
-            $raffle->coupons()->updateOrCreate([
-                'number' => $number,
-                ], [
-                'code'   => $code,
-                'status' => $status,
-                'notes'  => $notes.':'.$signature,
-                ]);
+
+            try {
+                $raffle->coupons()->create([
+                    'number' => $number,
+                    'code'   => $code,
+                    'status' => $status,
+                    'notes'  => $notes.':'.$signature,
+                    ]);
+                $this->info("{$code};{$signature};{$status};{$number};{$notes}");
+            } catch (\Exception $e) {
+                $this->warn("{$code};{$signature};{$status};{$number};{$notes} (NOT CHANGED)");
+            }
         }
 
         $this->info('DONE');
