@@ -1,11 +1,11 @@
 <?php
 
 use App\CORE\RaffleDealer;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RaffleDealerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     public function test_provides_numbers_list_to_browse()
     {

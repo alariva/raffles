@@ -149,7 +149,7 @@ class CouponsController extends Controller
 
         $purchase = $raffle->purchases()->whereHash($hash)->first();
 
-        return view('purchases.status', compact('purchase'));
+        return view('purchases.status', compact('raffle', 'purchase'));
     }
 
     protected function reserveCoupons(Raffle $raffle, array $numbers, $notes = null)

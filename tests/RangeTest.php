@@ -4,11 +4,14 @@ use App\CORE\Range;
 
 class RangeTest extends TestCase
 {
+    /**
+     * @var \App\CORE\Range
+     */
     protected $range;
 
     public function setUp()
     {
-        parent::__construct();
+        parent::setUp();
 
         $this->range = new Range();
     }

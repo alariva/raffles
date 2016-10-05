@@ -10,7 +10,8 @@
         "graham-campbell/markdown": "^7.0",
         "patricktalmadge/bootstrapper": "^5.9",
         "laravelcollective/html": "^5.3",
-        "ipunkt/laravel-analytics": "^1.2"
+        "ipunkt/laravel-analytics": "^1.2",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -29,7 +30,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "tests/helpers/"
         ]
     },
     "scripts": {

@@ -24,7 +24,7 @@
         {!! Button::primary('Elegi tus numeros de la suerte acá')
                     ->block()
                     ->large()
-                    ->asLinkTo(route('coupons.browse', $raffle)) !!}
+                    ->asLinkTo(route('coupons.browse', $raffle), ['id' => '#browse']) !!}
         @else
         {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->diffForHumans().'! Mucha suerte!') !!}
         @endif
