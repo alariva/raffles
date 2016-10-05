@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\CouponMark::class,
         \App\Console\Commands\CouponCleanup::class,
+        \App\Console\Commands\CouponBrowse::class,
         \App\Console\Commands\PurchaseList::class,
         \App\Console\Commands\PurchaseMark::class,
         \App\Console\Commands\ReportStats::class,
