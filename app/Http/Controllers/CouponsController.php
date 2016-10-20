@@ -67,7 +67,7 @@ class CouponsController extends Controller
 
         $numbers = session('cart.numbers');
 
-        if (count($numbers) % 2 == 0) {
+        if (count($numbers) % $raffle->getPreference('combo.number', 2) == 0) {
             logger()->info('AUTOREDIRECTING TO CHECKOUT');
 
             return redirect()->route('coupons.checkout', $raffle);
@@ -90,7 +90,7 @@ class CouponsController extends Controller
             return redirect()->route('raffle.home', $raffle)->withErrors('Al menos uno de los numeros ya fue reservado');
         }
 
-        $price = $this->calculatePrice(count($coupons));
+        $price = $this->calculatePrice($raffle, count($coupons));
 
         return view('checkout', compact('raffle', 'coupons', 'price'));
     }
@@ -131,7 +131,7 @@ class CouponsController extends Controller
 
         $count = count($coupons);
 
-        $price = $this->calculatePrice($count);
+        $price = $this->calculatePrice($raffle, $count);
 
         logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
 
@@ -168,12 +168,12 @@ class CouponsController extends Controller
         return $coupons;
     }
 
-    protected function calculatePrice($count)
+    protected function calculatePrice(Raffle $raffle, $count)
     {
-        $individualPrice = 30; // Currency
-        $comboPrice = 50; // Currency
+        $individualPrice = $raffle->getPreference('individual.price', 30); // Currency
+        $comboPrice = $raffle->getPreference('combo.price', 50); // Currency
 
-        $comboNumber = 2; // Number of elements
+        $comboNumber = $raffle->getPreference('combo.number', 2); // Number of elements
 
         return $count % $comboNumber * $individualPrice + floor($count / $comboNumber) * $comboPrice;
     }
