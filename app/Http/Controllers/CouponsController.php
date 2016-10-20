@@ -135,7 +135,7 @@ class CouponsController extends Controller
 
         logger()->info("CHECKOUT CALCULATED PRICE IS: {$price}");
 
-        $paymentUrl = $this->generatePaymentUrl($numbers, $price);
+        $paymentUrl = $this->generatePaymentUrl($raffle->slug, $numbers, $price);
 
         $hash = md5($paymentUrl);
 
@@ -193,16 +193,18 @@ class CouponsController extends Controller
         return true;
     }
 
-    protected function generatePaymentUrl($coupons, $price)
+    protected function generatePaymentUrl($prefix, $coupons, $price)
     {
         $count = count($coupons);
+
+        $prefix = strtoupper($prefix);
 
         // id=516862&precio=15,30&venc=7&codigo=15&hacia=website2@website2.com&concepto=hosting plan 4
         $query = http_build_query([
             'id'       => 516862,
             'precio'   => $price,
             'venc'     => 3,
-            'codigo'   => 'TR-DKVM-'.implode(',', $coupons),
+            'codigo'   => 'COUPONIC-'.$prefix.'-'.implode(',', $coupons),
             'concepto' => $count.' talones: '.implode(',', $coupons),
             ]);
 
