@@ -11,7 +11,8 @@
         "patricktalmadge/bootstrapper": "^5.9",
         "laravelcollective/html": "^5.3",
         "ipunkt/laravel-analytics": "^1.2",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "klaude/eloquent-preferences": "^0.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

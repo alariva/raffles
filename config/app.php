@@ -183,6 +183,7 @@ return [
         Bootstrapper\BootstrapperL5ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
+        KLaude\EloquentPreferences\EloquentPreferencesServiceProvider::class,
 
     ],
 

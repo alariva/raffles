@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f933513c7bdb0f2b063ec11de50f1c30",
-    "content-hash": "91efdd21f9a9f061a3766f811b887c7e",
+    "hash": "0b5b6440ac05c858b1323d0c90dda0bf",
+    "content-hash": "d8bf686c06da0c468561d265b342106e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -819,6 +819,53 @@
                 "tokenizer"
             ],
             "time": "2015-12-05 17:17:57"
+        },
+        {
+            "name": "klaude/eloquent-preferences",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klaude/eloquent-preferences.git",
+                "reference": "6103195b9b1792d7431f06be9c587b532c11ec5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klaude/eloquent-preferences/zipball/6103195b9b1792d7431f06be9c587b532c11ec5a",
+                "reference": "6103195b9b1792d7431f06be9c587b532c11ec5a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0"
+            },
+            "require-dev": {
+                "illuminate/events": "~5.0",
+                "phpunit/phpunit": "~5.0|~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "KLaude\\EloquentPreferences\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Laude",
+                    "email": "nerfyoda@gmail.com"
+                }
+            ],
+            "description": "Preferences for Laravel Eloquent models",
+            "homepage": "https://github.com/klaude/eloquent-preferences",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "preferences"
+            ],
+            "time": "2016-04-24 00:12:42"
         },
         {
             "name": "laravel/framework",

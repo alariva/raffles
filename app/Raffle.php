@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use KLaude\EloquentPreferences\HasPreferences;
 
 class Raffle extends Model
 {
+    use HasPreferences;
+
     /**
      * The attributes that are mass assignable.
      *
