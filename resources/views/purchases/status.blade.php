@@ -34,7 +34,7 @@
     </div>
 
       @if($purchase->url && !$purchase->isPaid())
-        {!! Button::primary('Ticket de Pago')
+        {!! Button::primary('Ticket de Pago Adelantado')
                     ->large()
                     ->block()
                     ->prependIcon('<i class="fa fa-money"></i>&nbsp;')
