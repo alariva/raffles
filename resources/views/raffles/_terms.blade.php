@@ -7,7 +7,7 @@
                 <h4 class="modal-title" id="myModalLabel">Bases y Condiciones</h4>
             </div>
             <div class="modal-body">
-                <p><small>{!! Markdown::convertToHtml( $terms ) !!}</small></p>
+                <small>{!! Markdown::convertToHtml( $terms ) !!}</small>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
