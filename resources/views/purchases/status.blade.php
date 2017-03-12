@@ -6,7 +6,7 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
     <div class="panel panel-default">
       <!-- Default panel contents -->
-      <div class="panel-heading">Estado de tu incripción</div>
+      <div class="panel-heading">Estado de tu inscripción</div>
 
       <div class="panel-body">
 
@@ -22,7 +22,7 @@
           @endif
         @endforeach
 
-        <p>Recordá que tu incripción está confirmada, y podés abonarla en el taller, o por adelantado con descuento.</p>
+        <p>Recordá que tu inscripción está confirmada, y podés abonarla en el taller, o por adelantado con descuento.</p>
 
       </div>
 
