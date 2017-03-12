@@ -75,11 +75,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Sorteos
+                    Couponic Activos
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('raffle.home', 'dkvm') }}">DKVM</a>
+                    <a href="{{ route('raffle.home', 'taller-de-cnv') }}">Taller de CNV</a>
                 </div>
             </div>
         </div>
