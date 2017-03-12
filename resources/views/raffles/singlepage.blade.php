@@ -96,7 +96,7 @@
 
       <div class="panel-footer">
 
-        {!! Button::success("Reservar (ARS $price)")
+        {!! Button::success("Inscribirme (ARS $price)")
                     ->block()
                     ->large()
                     ->prependIcon('<i class="fa fa-shopping-cart" aria-hidden="true"></i>')
