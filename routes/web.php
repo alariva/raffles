@@ -68,6 +68,11 @@ Route::group(['prefix' => '{raffle}'], function() {
         'uses' => 'PurchaseController@status',
     ]);
 
+    Route::post('/directconfirm', [
+        'as'   => 'coupons.directconfirm',
+        'uses' => 'SinglepageController@directconfirm',
+    ]);
+
     ////////////////
     // Backoffice //
     ////////////////

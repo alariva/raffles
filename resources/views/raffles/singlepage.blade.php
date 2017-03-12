@@ -1,8 +1,43 @@
 @extends('layouts.public')
-@section('page_heading', "Paso 2: Confirmá tus datos")
+@section('page_heading', $raffle->name)
 @section('section')
 
-{!! Form::open(['route' => ['coupons.confirm', $raffle], 'class' => 'form-horizontal']) !!}
+<div class="container-fluid">
+
+    {!! Markdown::convertToHtml( $raffle->description ) !!}
+
+    @if($raffle->opened_at->isFuture())
+
+        {!! Alert::info('La entrega de talones abre '.$raffle->opened_at->diffForHumans()) !!}
+
+    @else
+
+    <div class="row">
+
+        @if($raffle->closed_at->isFuture())
+        {!! Alert::info("La entrega de talones cierra {$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->diffForHumans()} ({$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->toDateTimeString()})") !!}
+
+        @else
+        {!! Alert::warning('La entrega de talones cerró '.$raffle->closed_at->timezone('America/Argentina/Buenos_Aires')->diffForHumans()) !!}
+        @endif
+
+        @if($terms)
+            <button class="btn btn-normal btn-lg btn-block" data-toggle="modal" data-target="#myModal">
+                Términos
+            </button>
+
+            @include('raffles._terms', compact('terms'))
+        @endif
+
+    </div>
+
+    @endif
+
+</div>
+
+<br/>
+
+{!! Form::open(['route' => ['coupons.directconfirm', $raffle], 'class' => 'form-horizontal']) !!}
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 
     <div class="panel panel-default">
@@ -10,12 +45,19 @@
 
       <div class="panel-body">
         
-        <p class="lead">Necesitamos algunos datos de contacto.</p>
+        <p class="lead">Registro para participar del taller.</p>
 
         <div class="form-group">
         {!! Form::label('name', 'Tu Nombre completo', ['class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-8">
           {!! Form::text('name', '', ['class' => 'form-control input-lg', 'placeholder' => 'Juan Perez']) !!}
+        </div>
+        </div>
+
+        <div class="form-group">
+        {!! Form::label('dni', 'Tu DNI', ['class' => 'col-sm-4 control-label']) !!}
+        <div class="col-sm-8">
+          {!! Form::text('dni', '', ['class' => 'form-control input-lg', 'placeholder' => '00000000']) !!}
         </div>
         </div>
 
@@ -34,9 +76,9 @@
         </div>
 
         <div class="form-group">
-        {!! Form::label('city', 'Ciudad', ['class' => 'col-sm-4 control-label']) !!}
+        {!! Form::label('city', 'Barrio', ['class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-8">
-        {!! Form::text('city', 'Villa Martelli, Buenos Aires', ['class' => 'form-control input-lg', 'placeholder' => 'Buenos Aires']) !!}
+        {!! Form::text('city', '', ['class' => 'form-control input-lg', 'placeholder' => 'Villa Urquiza, CABA']) !!}
         </div>
         </div>
 
@@ -46,42 +88,24 @@
               <label style="font-size: 1em">
                   <input type="checkbox" name="accept_terms" value="yes">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                  Acepto las Condiciones
+                  Acepto las Condiciones del taller
               </label>
           </div>
         </div>
         </div>
 
-      <!-- List group -->
-      <ul class="list-group">
-        @foreach($coupons as $coupon)
-            <li class="list-group-item list-group-item-success">
-              <i class="fa fa-tag"></i>&nbsp;
-              <big><strong>N° {{ $coupon }}</strong></big>
-            </li>
-        @endforeach
-      </ul>
-
       <div class="panel-footer">
 
-        {!! Button::success("Confirmar Talones (\$ {$price})")
+        {!! Button::success("Reservar (ARS $price)")
                     ->block()
                     ->large()
                     ->prependIcon('<i class="fa fa-shopping-cart" aria-hidden="true"></i>')
                     ->submit() !!}
 
-        {!! Button::normal("Agregar más talones")
-                    ->block()
-                    ->large()
-                    ->prependIcon('<i class="fa fa-plus" aria-hidden="true"></i>')
-                    ->asLinkTo(route('coupons.browse', $raffle)) !!}
-
       </div>
     </div>
 </div>
 {!! Form::close() !!}
-
-@include('_footer')
 
 @stop
 

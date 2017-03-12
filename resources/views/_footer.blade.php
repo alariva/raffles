@@ -30,6 +30,7 @@
         <li><img src="{!! asset('img/payment/logos/cordobesa.png') !!}" alt="cobrar con tarjeta CORDOBESA" height="30"></li>
     </ul>
 
+{{--
     <div class="media">
       <div class="media-left">
           <img class="media-object" height="96" width="96" src="{!! asset('img/logo-loteria-nacional.jpg') !!}" alt="Loteria Nacional">
@@ -40,5 +41,5 @@
         nocturna de Lotería Nacional. La entrega de premios será publicada en nuestros canales de Youtube y Facebook.</p>
       </div>
     </div>
-
+--}}
 </div>

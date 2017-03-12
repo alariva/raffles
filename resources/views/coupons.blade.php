@@ -1,5 +1,5 @@
 @extends('layouts.public')
-@section('page_heading','Paso 1: Elegí tus números')
+@section('page_heading','Paso 1: Elegí tu cupón')
 @section('section')
 
 <div class="container-fluid">
@@ -59,7 +59,7 @@
 
     @else
 
-      {!! Alert::info('Elegí una rifa para reservar') !!}
+      {!! Alert::info('Elegí un talón para reservar') !!}
 
     @endif
 

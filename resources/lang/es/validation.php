@@ -97,13 +97,13 @@ return [
 
     'custom' => [
         'accept_terms' => [
-            'required' => 'Debés aceptar las bases y condiciones para participar',
+            'required' => 'Es necesario aceptar las condiciones del servicio para continuar',
         ],
         'tel' => [
-            'required' => 'Necesitamos un número de teléfono para contactarte en caso de ganar',
+            'required' => 'Necesitamos un número de teléfono para contactarte de ser necesario',
         ],
         'name' => [
-            'required' => 'Dinos tu nombre',
+            'required' => 'Por favor dinos tu nombre',
         ],
         'city' => [
             'required' => 'Necesitamos saber en qué ciudad estás',

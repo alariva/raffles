@@ -21,7 +21,11 @@ class RaffleController extends Controller
 
         $reservedCount = $raffle->coupons()->where('status', '<>', 'F')->count();
 
-        return view('raffles.home', compact('raffle', 'reservedCount', 'terms'));
+        $home = $raffle->getPreference('homepage.type', 'home');
+
+        $price = $raffle->getPreference('individual.price');
+
+        return view("raffles.$home", compact('raffle', 'reservedCount', 'price', 'terms'));
     }
 
     protected function loadTermsAndConditions($slug)
