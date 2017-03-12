@@ -9,7 +9,7 @@
 	<title>Couponic</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1" name="viewport"/>
-	<meta content="Organizá tu campaña y empezá recolectar" name="description"/>
+	<meta content="{{ $raffle->name }}" name="description"/>
 	<meta content="alariva.com" name="author"/>
 
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
