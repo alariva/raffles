@@ -55,7 +55,7 @@ class SinglepageController extends Controller
             return redirect()->route('raffle.home', $raffle)->withErrors('La campaña no está activa');
         }
         
-        $ticket = $request->only(['name', 'email', 'tel', 'city', 'contactme', 'accept_terms']);
+        $ticket = $request->only(['name', 'email', 'tel', 'dni', 'city', 'accept_terms']);
 
         $coupons = collect($this->dealer->setRaffle($raffle)->browse());
 
