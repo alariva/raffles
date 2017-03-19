@@ -25,4 +25,13 @@
 	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
     @stack('scripts')
 </body>
+
+<script type="text/javascript">
+    var images = document.getElementsByTagName("img");
+    var i;
+
+    for(i = 0; i < images.length; i++) {
+        images[i].className += " img-responsive";
+    }
+</script>
 </html>
