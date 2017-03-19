@@ -19,7 +19,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-shopping-cart fa-fw"></i> Mis compras&nbsp;<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-shopping-cart fa-fw"></i> Mis reservas&nbsp;<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                     @if(session('cart.purchases'))
