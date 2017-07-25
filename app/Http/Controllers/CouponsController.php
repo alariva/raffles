@@ -170,12 +170,26 @@ class CouponsController extends Controller
 
     protected function calculatePrice(Raffle $raffle, $count)
     {
-        $individualPrice = $raffle->getPreference('individual.price', 30); // Currency
-        $comboPrice = $raffle->getPreference('combo.price', 50); // Currency
+        $comboPricing = $raffle->getPreference('combo.pricing', '3:100,2:80,1:50');
 
-        $comboNumber = $raffle->getPreference('combo.number', 2); // Number of elements
+        $combos = explode(',', $comboPricing);
 
-        return $count % $comboNumber * $individualPrice + floor($count / $comboNumber) * $comboPrice;
+        $total = 0;
+
+        foreach ($combos as $value) {
+            list($comboCount, $price) = explode(':', $value);
+
+            $total += floor($count / $comboCount) * $price;
+
+            $count = $count % $comboCount;
+        }
+
+        if($count != 0)
+        {
+            logger()->warn('ADVICE: Count is non zero');
+        }
+
+        return $total;
     }
 
     protected function couponsAreAvailable(Raffle $raffle, $coupons)
